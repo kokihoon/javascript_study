@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8"/>
+  <title>영화</title>
+</head>
+<body onload = "startCredit()" bgcolor = "black" color = "white">
+  <div id = "credit">
+
+  </div>
+<script>
+  var creditList = new Array(
+    "윤동주 시집",
+    "",
+    "",
+    "",
+    "",
+    "<서시>",
+    "죽는 날까지 하늘을 우러러",
+    "한점 부끄럼이 없기를",
+    "잎새에 이는 바람에도",
+    "나는 괴로워했다.",
+    "별을 노래하는 마음으로",
+    "모든 죽어가는 것을 사랑해야지",
+    "그리고 나한테 주어진 길을",
+    "걸어가야겠다.",
+    "",
+    "오늘밤에도 별이 바람에 스치운다.",
+    "",
+    "",
+    "",
+    "",
+    "<눈감고 가라>",
+    "",
+    "태양을 사모하는 아이들아",
+    "별을 사랑하는 아이들아",
+    "밤이 어두웠는데",
+    "눈감고 가거라",
+    "발부리에 돌이 채이거든",
+    "감았던 눈을 와짝 떠라",
+    "",
+    "",
+    "",
+    "",
+    "<새로운길>",
+    "",
+    "내를 건너서 숲으로",
+    "고개를 넘어서 마을로",
+    "어제도 가고 오늘도 갈",
+    "나의 길 새로운 길",
+    "민들레가 피고 까치는 날고",
+    "아가씨가 지나고 바람이 일고",
+    "나의 길은 언제나 새로운 길",
+    "오늘도..... 내일도.....",
+    "내를 건너서 숲으로",
+    "고개를 넘어서 마을로"
+  );
+
+  var divCredit = null;
+  var divTop = 0;
+  var divHeight = 0;
+  var precounter = 0;
+  var fadeout_on = false;
+  var fadein_on = false;
+  var textAppearIdx = 0;
+  var textDisappearIdx = 0;
+  var changeAppearCnt = 0;
+  var changeDisappearCnt = 0;
+  var appearColor = 0;
+  var disappearColor = 255;
+  var tmpTop = 0;
+  function startCredit() {
+    divCredit = document.getElementById("credit");
+
+    var wiw = window.innerWidth;
+    var wih = window.innerHeight;
+
+    divCredit.style.cssText = "position:absolute; top:" +wih + "px; left: 0px; width : " + wiw + ";height : " + 0 + "px;font-size:20px; overflow:hidden;";
+
+    createDivs(creditList);
+    scrollFirst();
+  }
+
+  function createDivs(arrayList) {
+    var tmpCenter = document.createElement("CENTER");
+
+    for(var idx = 0; idx < arrayList.length; idx++) {
+      var tmpDiv = document.createElement("DIV");
+      var tmpText = document.createTextNode(arrayList[idx]);
+      var tmpBr = document.createElement("BR");
+
+      tmpDiv.setAttribute("id", "textLine" + idx);
+
+      tmpDiv.style.cssText = "postion:relative;color:black; font-size:20px;";
+      tmpDiv.appendChild(tmpText);
+
+      tmpDiv.appendChild(tmpBr);
+      tmpCenter.appendChild(tmpDiv);
+
+    }
+    divCredit.appendChild(tmpCenter);
+  }
+
+  function scrollFirst() {
+    divTop = parseInt(divCredit.style.top);
+    if(isNaN(divTop)) {
+      divTop = 0;
+    }
+    divTop -= 2;
+
+    divCredit.style.top = divTop+"px";
+    setTimeout("scrollSecond()", 20);
+  }
+  function scrollSecond() {
+    divHeight = parseInt(divCredit.style.height);
+    if(isNaN(divHeight)) {
+      divHeight = 0;
+    }
+    divHeight += 2;
+    divCredit.style.height = divHeight + "px";
+    precounter++;
+    if(precounter > 20) {
+      fadein_on = true;
+    }
+    if(fadein_on) {
+      if(textAppearIdx < creditList.length) {
+        var tmpText1 = document.getElementById("textLine" + textAppearIdx);
+        tmpText1.style.color = "rgb("+appearColor+"," + appearColor+"," + appearColor+")";
+        appearColor += 17;
+      }
+      changeAppearCnt++;
+      if(changeAppearCnt > 15) {
+        changeAppearCnt = 0;
+        appearColor = 0;
+        textAppearIdx++;
+      }
+    }
+    tmpTop = parseInt(divCredit.style.top);
+    if(isNaN(tmpTop)) {
+      tmpTop = 0;
+    }
+    if(tmpTop < 120 && fadeout_on == false) {
+      fadeout_on = true;
+    }
+    if(fadeout_on) {
+      if(textDisappearIdx < creditList.length) {
+        var tmpText2 = document.getElementById("textLine" +textDisappearIdx);
+        tmpText2.style.color = "rgb("+disappearColor+"," + disappearColor +"," + disappearColor+")";
+        disappearColor -= 17;
+      }
+      changeDisappearCnt++;
+      if(changeDisappearCnt > 15) {
+        changeDisappearCnt = 0;
+        disappearColor = 255;
+        textDisappearIdx++;
+      }
+    }
+    setTimeout("scrollFirst()", 20);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <mete charset = "utf-8" />
+</head>
+
+<body>
+<script>
+
+  var varTimeout;
+  var varInterval;
+
+  function funcTimeout() {
+    varTimeout = setTimeout(function() {alert("Start setTimeout");}, 3000);
+  }
+  function funcInterval() {
+    varInterval = setInterval (function() {alert("Start setInterval");}, 3000);
+  }
+  function funcStopTimeout() {
+    clearTimeout(varTimeout);
+
+  }
+  function funcStopInterval() {
+    clearTimeout(varInterval);
+  }
+</script>
+
+<button onclick = "funcTimeout()">Start setTimeout() </button>
+<button onclick = "funcInterval()">Start setInterval() </button>
+<button onclick = "funcStopTimeout()">Stop setTimeout() </button>
+<button onclick = "funcStopInterval()">Stop setInterval() </button>
+
+</body>
+</html>

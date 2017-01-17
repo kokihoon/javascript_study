@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "utf-8" />
+</head>
+<body>
+  <input type = "button" id = "btn" value = "button" />
+<script>
+  var btn = document.getElementById('btn');
+
+  function btnEvent1() {
+    alert('Hello world 1');
+  }
+
+  function btnEvent2() {
+    alert('Hello world 2');
+  }
+/*
+  if(btn.addEventListener) {
+    btn.addEventListener('click', btnEvent1);
+    btn.addEventListener('click', btnEvent2);
+  }*/
+  if(btn.attachEvent){
+    btn.attachEvent('onclick', btnEvent1);
+    btn.attachEvent('onclick', btnEvent2);
+  }
+</script>
+</body>
+</html>

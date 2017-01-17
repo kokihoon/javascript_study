@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>QQQQ</title>
+    <style>
+      #jb-container {
+        width : 940px;
+        margin : 0px auto;
+        padding : 20px;
+        border : 1px solid #bcbcbc;
+      }
+      #jb-header {
+        padding : 20px;
+        margin-bottom : 20px;
+        border : 1px solid #bcbcbc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id = "jb-container">
+      <div id = "jb-header">
+      </div>
+    </div>
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
